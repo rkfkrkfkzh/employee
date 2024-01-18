@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>직원 목록</title>
+</head>
+<body>
+<h1>직원 목록</h1>
+<table>
+    <!-- 검색 폼 -->
+    <form th:action="@{/employees/search}" method="get">
+        <label for="field">검색 필드:</label>
+        <select name="field" id="field">
+            <option value="employee_number">직원번호</option>
+            <option value="name">이름</option>
+            <option value="phone_number">전화번호</option>
+            <option value="position">직급</option>
+            <option value="email">이메일</option>
+        </select>
+        <label for="value">검색어:</label>
+        <input type="text" id="value" name="value" />
+        <button type="submit">검색</button>
+    </form>
+
+    <thead>
+    <tr>
+        <th>직원번호</th>
+        <th>이름</th>
+        <th>전화번호</th>
+        <th>직급</th>
+        <th>이메일</th>
+        <th>작업</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="employee : ${employees}">
+        <td th:text="${employee.employeeNumber}">001</td>
+        <td th:text="${employee.name}">홍길동</td>
+        <td th:text="${employee.phoneNumber}">010-1234-5678</td>
+        <td th:text="${employee.position}">과장</td>
+        <td th:text="${employee.email}">hong@example.com</td>
+        <td>
+            <a th:href="@{/employees/edit/{id}(id=${employee.id})}">수정</a>
+            <form th:action="@{/employees/delete/{id}(id=${employee.id})}" method="post">
+                <input type="hidden" name="_method" value="delete">
+                <button type="submit">삭제</button>
+            </form>
+
+        </td>
+    </tr>
+    </tbody>
+</table>
+<a th:href="@{/employees/new}">새 직원 추가</a>
+</body>
+</html>

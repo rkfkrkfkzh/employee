@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>직원 상세 정보</title>
+</head>
+<body>
+<h1>직원 상세 정보</h1>
+<div>
+  <p><strong>직원번호:</strong> <span th:text="${employee.employeeNumber}">001</span></p>
+  <p><strong>이름:</strong> <span th:text="${employee.name}">이름</span></p>
+  <p><strong>전화번호:</strong> <span th:text="${employee.phoneNumber}">010-0000-0000</span></p>
+  <p><strong>직급:</strong> <span th:text="${employee.position}">직급</span></p>
+  <p><strong>이메일:</strong> <span th:text="${employee.email}">email@example.com</span></p>
+  <a th:href="@{'/employees/edit/' + ${employee.id}}">수정</a>
+  <a th:href="@{'/employees/delete/' + ${employee.id}}">삭제</a>
+</div>
+</body>
+</html>

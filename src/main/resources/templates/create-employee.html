@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>새 직원 등록</title>
+    <script>
+        function validatePhoneNumber() {
+            var phoneNumber = document.getElementById("phoneNumber").value;
+            var phoneNumberPattern = /^01[0-9]{1}-[0-9]{4}-[0-9]{4}$/;
+
+            if (!phoneNumberPattern.test(phoneNumber)) {
+                alert("올바른 전화번호 형식이 아닙니다. (예: 010-1234-5678)");
+                return false;
+            }
+            return true;
+        }
+
+        function validateEmail() {
+            var email = document.getElementById("email").value;
+            var emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+            if (!emailPattern.test(email)) {
+                alert("올바른 이메일 형식이 아닙니다.");
+                return false;
+            }
+            return true;
+        }
+
+        function validateForm() {
+            return validatePhoneNumber() && validateEmail();
+        }
+    </script>
+</head>
+<body>
+<h1>새 직원 등록</h1>
+<form th:action="@{/employees}" th:object="${employee}" method="post" onsubmit="return validateForm()">
+    <label for="employeeNumber">직원번호:</label>
+    <input type="text" id="employeeNumber" th:field="*{employeeNumber}" /><br/>
+    <label for="name">이름:</label>
+    <input type="text" id="name" th:field="*{name}" /><br/>
+    <label for="phoneNumber">전화번호:</label>
+    <input type="text" id="phoneNumber" th:field="*{phoneNumber}" /><br/>
+    <label for="position">직급:</label>
+    <input type="text" id="position" th:field="*{position}" /><br/>
+    <label for="email">이메일:</label>
+    <input type="text" id="email" th:field="*{email}" /><br/>
+    <button type="submit">등록</button>
+</form>
+<a th:href="@{/employees}">취소</a>
+</body>
+</html>

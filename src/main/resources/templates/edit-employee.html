@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>직원 정보 수정</title>
+</head>
+<body>
+<h1>직원 정보 수정</h1>
+<form th:action="@{'/employees/update/' + ${employee.id}}" th:object="${employee}" method="post">
+    <input type="hidden" th:field="*{id}" />
+    <label for="employeeNumber">직원번호:</label>
+    <input type="text" id="employeeNumber" th:field="*{employeeNumber}" /><br/>
+    <label for="name">이름:</label>
+    <input type="text" id="name" th:field="*{name}" /><br/>
+    <label for="phoneNumber">전화번호:</label>
+    <input type="text" id="phoneNumber" th:field="*{phoneNumber}" /><br/>
+    <label for="position">직급:</label>
+    <input type="text" id="position" th:field="*{position}" /><br/>
+    <label for="email">이메일:</label>
+    <input type="text" id="email" th:field="*{email}" /><br/>
+    <button type="submit">수정</button>
+</form>
+</body>
+</html>
